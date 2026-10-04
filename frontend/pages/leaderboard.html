@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leaderboard - Placement Circle</title>
+
+    <link rel="stylesheet" href="../css/leaderboard.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+
+                <div class="logo-text">
+                    Placement <span>Circle</span>
+                </div>
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="daily-prep.html" class="nav-item">
+                    <span class="nav-icon">ϟ</span>
+                    <span>Daily Prep</span>
+                </a>
+
+                <a href="practice.html" class="nav-item">
+                    <span class="nav-icon">▣</span>
+                    <span>Practice</span>
+                </a>
+
+                <a href="internships.html" class="nav-item">
+                    <span class="nav-icon">▤</span>
+                    <span>Internships</span>
+                </a>
+
+                <a href="alumni.html" class="nav-item">
+                    <span class="nav-icon">♧</span>
+                    <span>Alumni</span>
+                </a>
+
+                <a href="leaderboard.html" class="nav-item active">
+                    <span class="nav-icon">♜</span>
+                    <span>Leaderboard</span>
+                </a>
+
+                <a href="progress.html" class="nav-item">
+                    <span class="nav-icon">⌁</span>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">♙</span>
+                    <span>Profile</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button class="bottom-item" id="themeBtn">
+                    <span>☼</span>
+                    <span>Light mode</span>
+                </button>
+
+                <button class="bottom-item" id="logoutBtn">
+                    <span>↪</span>
+                    <span>Log out</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div class="topbar-right">
+
+                    <button class="notification">♧</button>
+
+                    <div class="profile">
+
+                        <div class="avatar">AA</div>
+
+                        <div class="profile-info">
+                            <strong>Aarav Patel</strong>
+                            <span>CSE · Final Year</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <div class="page-top">
+
+                    <div class="page-header">
+                        <h1>Leaderboard</h1>
+                        <p>Compete, learn, get placed.</p>
+                    </div>
+
+                    <div class="scope-filters" id="scopeFilters">
+                        <button class="scope-btn active" data-scope="overall">Overall</button>
+                        <button class="scope-btn" data-scope="branch">My Branch</button>
+                        <button class="scope-btn" data-scope="year">My Year</button>
+                    </div>
+
+                </div>
+
+
+                <!-- YOUR RANK (rendered by js/leaderboard.js) -->
+                <div class="you-card" id="youCard"></div>
+
+
+                <!-- LIST (rendered by js/leaderboard.js) -->
+                <div class="board-card" id="boardCard"></div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/leaderboard.js"></script>
+
+<script src="../js/animations.js"></script>
+
+</body>
+
+</html>

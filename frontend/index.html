@@ -1,47 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Placement Circle — Your placement prep, in one circle</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Circle</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
+
 <body>
 
-  <nav class="navbar">
-    <div class="logo">
-      <span class="logo-mark"></span>
-      Placement <span class="accent">Circle</span>
-    </div>
-    <div class="nav-actions">
-      <a href="pages/login.html" class="nav-link">Log in</a>
-      <a href="pages/signup.html" class="btn btn-primary">Get started →</a>
-    </div>
-  </nav>
+    <!-- ================= NAVBAR ================= -->
 
-  <main class="hero">
-    <span class="badge">✨ Built for the class of 2026 &amp; 2027</span>
+    <header class="navbar">
 
-    <h1>Your placement prep,<br /><span class="grad-text">in one circle.</span></h1>
+        <div class="logo">
+            <span class="logo-circle">◯</span>
+            <span>Placement <strong>Circle</strong></span>
+        </div>
 
-    <p>
-      Practice DSA, aptitude and HR — every day. Track streaks, learn from
-      alumni who got placed, and finally know exactly what to do next.
-    </p>
+        <nav>
 
-    <div class="hero-actions">
-      <a href="pages/signup.html" class="btn btn-primary">Start today's mission →</a>
-      <a href="pages/login.html" class="btn btn-outline">Log in with college email</a>
-    </div>
+            <!-- Login -->
+            <a href="pages/login.html" class="login-link">
+                Log in
+            </a>
 
-    <div class="hero-meta">
-      <span><span class="check">✓</span> Free for students</span>
-      <span><span class="check">✓</span> 3 questions / day</span>
-    </div>
-  </main>
+            <!-- Signup -->
+            <a href="pages/signup.html" class="get-started">
+                Get started <span>→</span>
+            </a>
 
-  <script src="js/script.js"></script>
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main class="hero">
+
+        <!-- LEFT SIDE -->
+
+        <section class="hero-content">
+
+            <div class="badge">
+                ✨ Built for the class of 2026 & 2027
+            </div>
+
+
+            <h1>
+                Your placement prep,
+                <span>in one circle.</span>
+            </h1>
+
+
+            <p class="description">
+                Practice DSA, aptitude and HR — every day.
+                Track streaks, learn from alumni who got placed,
+                and finally know exactly what to do next.
+            </p>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <!-- IMPORTANT:
+                     This opens signup page -->
+
+                <a href="pages/signup.html" class="primary-btn">
+                    Start today's mission
+                    <span>→</span>
+                </a>
+
+
+                <a href="pages/login.html" class="secondary-btn">
+                    Log in with college email
+                </a>
+
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+                <div>
+                    <span>✓</span>
+                    Free for students
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    3 questions / day
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Real alumni experiences
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MISSION CARD ================= -->
+
+        <section class="mission-card">
+
+            <div class="mission-header">
+
+                <div>
+                    <p>TODAY'S MISSION</p>
+                </div>
+
+                <div class="streak">
+                    🔥 12-day streak
+                </div>
+
+            </div>
+
+
+            <!-- DSA -->
+
+            <div class="mission-item completed">
+
+                <div class="mission-icon">
+                    ⚡
+                </div>
+
+                <div class="mission-info">
+
+                    <h3>
+                        DSA — Longest Increasing Subseq.
+                    </h3>
+
+                    <p>
+                        Medium · 25 min
+                    </p>
+
+                </div>
+
+                <div class="status">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <!-- APTITUDE -->
+
+            <div class="mission-item completed">
+
+                <div class="mission-icon">
+                    ⚡
+                </div>
+
+                <div class="mission-info">
+
+                    <h3>
+                        Aptitude — Compound Interest
+                    </h3>
+
+                    <p>
+                        Medium · 3 min
+                    </p>
+
+                </div>
+
+                <div class="status">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <!-- HR -->
+
+            <div class="mission-item">
+
+                <div class="mission-icon purple">
+                    ⚡
+                </div>
+
+                <div class="mission-info">
+
+                    <h3>
+                        HR — Tell me about yourself
+                    </h3>
+
+                    <p>
+                        Easy · 5 min
+                    </p>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat">
+                    <h2>1,240</h2>
+                    <p>POINTS</p>
+                </div>
+
+                <div class="stat">
+                    <h2>64</h2>
+                    <p>SOLVED</p>
+                </div>
+
+                <div class="stat">
+                    <h2>#18</h2>
+                    <p>RANK</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="js/script.js"></script>
+
+<script src="js/animations.js"></script>
+
 </body>
+
 </html>

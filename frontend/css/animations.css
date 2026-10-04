@@ -1,0 +1,377 @@
+/* =====================================================
+   PLACEMENT CIRCLE - SHARED ANIMATIONS & POLISH
+   Ye file saare pages mein sabse last mein load hoti hai.
+   Isko hata do toh site pehle jaisi ho jayegi.
+===================================================== */
+
+:root {
+    --pc-ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+    --pc-glow: rgba(124, 92, 246, 0.55);
+}
+
+
+/* =====================================================
+   1. PAGE ENTRANCE (cards, rows, sections slide up)
+   .pc-rise class animations.js laga deta hai
+===================================================== */
+
+@keyframes pcRise {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+    }
+}
+
+.pc-rise {
+    animation: pcRise 0.55s var(--pc-ease) backwards;
+    animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+
+/* =====================================================
+   2. HOVER EFFECTS
+===================================================== */
+
+.opp-card,
+.story-card,
+.question-card,
+.info-card,
+.badge-card,
+.card,
+.panel,
+.dashboard-card,
+.mission-card,
+.streak-card {
+    transition:
+        transform 0.25s var(--pc-ease),
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+}
+
+/* chhote cards: upar uthte hain */
+.opp-card:hover,
+.story-card:hover,
+.question-card:hover,
+.info-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(139, 123, 255, 0.55);
+    box-shadow: 0 12px 30px -14px var(--pc-glow);
+}
+
+.badge-card:not(.locked):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px -12px var(--pc-glow);
+}
+
+/* bade cards / panels: sirf halka glow */
+.card:hover,
+.panel:hover,
+.dashboard-card:hover,
+.mission-card:hover,
+.streak-card:hover {
+    border-color: rgba(139, 123, 255, 0.35);
+    box-shadow: 0 10px 34px -18px var(--pc-glow);
+}
+
+/* rows */
+.board-row,
+.question-row,
+.leaderboard-row {
+    transition: background-color 0.2s ease, padding-left 0.2s var(--pc-ease);
+}
+
+.board-row:hover,
+.question-row:hover {
+    background: rgba(124, 92, 246, 0.07);
+}
+
+
+/* =====================================================
+   3. BUTTONS
+===================================================== */
+
+.view-btn,
+.add-btn,
+.btn-submit,
+.primary-btn,
+.get-started,
+.start-btn,
+.login-btn,
+.otp-btn {
+    transition:
+        transform 0.2s var(--pc-ease),
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.view-btn:hover,
+.add-btn:hover,
+.btn-submit:hover,
+.primary-btn:hover,
+.get-started:hover,
+.start-btn:hover,
+.login-btn:hover,
+.otp-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px -10px var(--pc-glow);
+}
+
+.view-btn:active,
+.add-btn:active,
+.btn-submit:active,
+.btn-cancel:active,
+.primary-btn:active,
+.secondary-btn:active,
+.get-started:active,
+.start-btn:active,
+.login-btn:active,
+.otp-btn:active,
+.filter-btn:active,
+.type-btn:active,
+.scope-btn:active,
+.helpful-btn:active,
+.read-btn:active {
+    transform: translateY(0) scale(0.96);
+}
+
+.filter-btn,
+.type-btn,
+.scope-btn {
+    transition: background-color 0.18s ease, color 0.18s ease,
+        border-color 0.18s ease, transform 0.15s ease;
+}
+
+
+/* =====================================================
+   4. SIDEBAR
+===================================================== */
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item .nav-icon {
+    transition: transform 0.25s var(--pc-ease);
+}
+
+.nav-item:hover .nav-icon {
+    transform: translateX(2px) scale(1.12);
+}
+
+@keyframes pcBar {
+    from {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+}
+
+.nav-item.active::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+
+    background: #8b7bff;
+
+    animation: pcBar 0.45s var(--pc-ease) 0.15s backwards;
+}
+
+/* logo ring halka pulse */
+@keyframes pcLogoPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(139, 92, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+}
+
+.logo-icon,
+.logo-circle {
+    animation: pcLogoPulse 3s ease-out infinite;
+}
+
+/* bell wiggle */
+@keyframes pcWiggle {
+    0%, 100% { transform: rotate(0); }
+    25%      { transform: rotate(14deg); }
+    50%      { transform: rotate(-12deg); }
+    75%      { transform: rotate(8deg); }
+}
+
+.notification:hover,
+.notification-btn:hover {
+    animation: pcWiggle 0.5s ease;
+}
+
+.avatar {
+    transition: transform 0.25s var(--pc-ease), box-shadow 0.25s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.25);
+}
+
+
+/* =====================================================
+   5. CHARTS (Progress page)
+===================================================== */
+
+@keyframes pcDraw {
+    from { stroke-dashoffset: 251.33; }
+}
+
+.ring-fill {
+    animation: pcDraw 1.3s var(--pc-ease) 0.3s backwards;
+}
+
+@keyframes pcGrowX {
+    from { transform: scaleX(0); }
+}
+
+.h-bar {
+    transform-origin: left center;
+    animation: pcGrowX 0.9s var(--pc-ease) 0.4s backwards;
+}
+
+.h-row:nth-child(2) .h-bar { animation-delay: 0.55s; }
+.h-row:nth-child(3) .h-bar { animation-delay: 0.7s; }
+
+@keyframes pcGrowY {
+    from { transform: scaleY(0); }
+}
+
+.v-bar {
+    transform-origin: bottom center;
+    animation: pcGrowY 0.8s var(--pc-ease) 0.3s backwards;
+}
+
+@keyframes pcDonut {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg) scale(0.7);
+    }
+}
+
+.donut svg {
+    animation: pcDonut 1.1s var(--pc-ease) 0.3s backwards;
+}
+
+
+/* =====================================================
+   6. PROFILE: heatmap pop + flames
+===================================================== */
+
+@keyframes pcPop {
+    from {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+.heat-cell {
+    animation: pcPop 0.4s var(--pc-ease) backwards;
+    animation-delay: calc(0.35s + var(--c, 0) * 24ms);
+}
+
+@keyframes pcFlicker {
+    0%, 100% { transform: scale(1); }
+    40%      { transform: scale(1.1, 1.18) rotate(-4deg); }
+    70%      { transform: scale(0.95, 1.05) rotate(3deg); }
+}
+
+.streak svg,
+.stat-tile:first-child svg {
+    transform-origin: bottom center;
+    animation: pcFlicker 2.6s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   7. LANDING PAGE (index.html)
+===================================================== */
+
+@keyframes pcFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+.hero .mission-card.pc-rise {
+    animation:
+        pcRise 0.7s var(--pc-ease) backwards,
+        pcFloat 7s ease-in-out 0.9s infinite;
+    animation-delay: calc(var(--i, 0) * 55ms), 0.9s;
+}
+
+.navbar {
+    animation: pcRise 0.6s var(--pc-ease) backwards;
+}
+
+
+/* =====================================================
+   8. PAGE LEAVE (link click pe halka fade-out)
+===================================================== */
+
+.main,
+.main-content {
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+body.pc-leave .main,
+body.pc-leave .main-content {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+
+/* =====================================================
+   9. SMALL POLISH
+===================================================== */
+
+:focus-visible {
+    outline: 2px solid #8b7bff;
+    outline-offset: 2px;
+}
+
+::selection {
+    background: rgba(124, 92, 246, 0.4);
+    color: #ffffff;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #2a3350 transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #262e47;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3a4470;
+}
+
+
+/* =====================================================
+   10. ACCESSIBILITY: animation kam chahiye toh sab band
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daily Prep | Placement Circle</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/daily-prep.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">P</div>
+            <span>Placement Circle</span>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="dashboard.html" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="daily-prep.html" class="nav-item active">
+                <span class="nav-icon">ϟ</span>
+                <span>Daily Prep</span>
+            </a>
+
+            <a href="practice.html" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>Practice</span>
+            </a>
+
+            <a href="internships.html" class="nav-item">
+                <span class="nav-icon">▥</span>
+                <span>Internships</span>
+            </a>
+
+            <a href="alumni.html" class="nav-item">
+                <span class="nav-icon">♙</span>
+                <span>Alumni</span>
+            </a>
+
+            <a href="leaderboard.html" class="nav-item">
+                <span class="nav-icon">♕</span>
+                <span>Leaderboard</span>
+            </a>
+
+            <a href="progress.html" class="nav-item">
+                <span class="nav-icon">⌁</span>
+                <span>Progress</span>
+            </a>
+
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">♙</span>
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="bottom-item" id="themeBtn">
+                <span>☼</span>
+                <span>Light mode</span>
+            </button>
+
+            <button class="bottom-item" id="logoutBtn">
+                <span>↪</span>
+                <span>Log out</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-space"></div>
+
+            <div class="top-right">
+
+                <button class="notification-btn" title="Notifications">
+                    ♧
+                </button>
+
+                <div class="profile-mini">
+
+                    <div class="avatar">
+                        AA
+                    </div>
+
+                    <div class="profile-info">
+                        <strong>Aarav Patel</strong>
+                        <span>CSE · Final Year</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <section class="content">
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Daily Prep</h1>
+
+                    <p>
+                        3 questions · 20 minutes. Every day.
+                    </p>
+                </div>
+
+
+                <!-- MISSION -->
+
+                <div class="mission-card">
+
+                    <div class="mission-circle">
+
+                        <span id="completedCount">0</span>
+                        <span>/3</span>
+
+                    </div>
+
+                    <div class="mission-text">
+                        <strong>Today's mission</strong>
+                        <span id="missionStatus">3 left</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTIONS -->
+
+            <div class="question-grid">
+
+
+                <!-- DSA -->
+
+                <article class="question-card">
+
+                    <div class="card-top">
+
+                        <span class="category">
+                            DSA
+                        </span>
+
+                        <span class="arrow">
+                            ›
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Valid Palindrome
+                    </h2>
+
+
+                    <div class="question-meta">
+
+                        <span>
+                            Easy
+                        </span>
+
+                        <span class="dot">•</span>
+
+                        <span class="clock">
+                            ◷
+                        </span>
+
+                        <span>
+                            10 min
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="start-btn"
+                        data-question="Valid Palindrome"
+                        data-type="DSA"
+                    >
+                        Start <span>›</span>
+                    </button>
+
+                </article>
+
+
+                <!-- APTITUDE -->
+
+                <article class="question-card">
+
+                    <div class="card-top">
+
+                        <span class="category">
+                            Aptitude
+                        </span>
+
+                        <span class="arrow">
+                            ›
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Blood Relations
+                    </h2>
+
+
+                    <div class="question-meta">
+
+                        <span>
+                            Hard
+                        </span>
+
+                        <span class="dot">•</span>
+
+                        <span class="clock">
+                            ◷
+                        </span>
+
+                        <span>
+                            4 min
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="start-btn"
+                        data-question="Blood Relations"
+                        data-type="Aptitude"
+                    >
+                        Start <span>›</span>
+                    </button>
+
+                </article>
+
+
+                <!-- HR -->
+
+                <article class="question-card">
+
+                    <div class="card-top">
+
+                        <span class="category">
+                            HR
+                        </span>
+
+                        <span class="arrow">
+                            ›
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Handling a Team Conflict
+                    </h2>
+
+
+                    <div class="question-meta">
+
+                        <span>
+                            Medium
+                        </span>
+
+                        <span class="dot">•</span>
+
+                        <span class="clock">
+                            ◷
+                        </span>
+
+                        <span>
+                            5 min
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="start-btn"
+                        data-question="Handling a Team Conflict"
+                        data-type="HR"
+                    >
+                        Start <span>›</span>
+                    </button>
+
+                </article>
+
+
+            </div>
+
+
+            <!-- EXTRA SECTION -->
+
+            <section class="prep-info">
+
+                <div class="info-card">
+
+                    <div class="info-icon">⚡</div>
+
+                    <div>
+                        <h3>Build your daily streak</h3>
+
+                        <p>
+                            Complete all 3 questions every day to improve
+                            your preparation consistency.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">◷</div>
+
+                    <div>
+                        <h3>Only 20 minutes</h3>
+
+                        <p>
+                            A short daily practice session designed to fit
+                            into your college schedule.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">↗</div>
+
+                    <div>
+                        <h3>Track your progress</h3>
+
+                        <p>
+                            Your completed questions will contribute to
+                            your overall preparation progress.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="../js/daily-prep.js"></script>
+
+<script src="../js/animations.js"></script>
+
+</body>
+</html>

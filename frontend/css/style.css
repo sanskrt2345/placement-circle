@@ -1,365 +1,437 @@
-/* ===== Placement Circle — shared styles ===== */
-
-:root {
-  --bg: #0a0a12;
-  --bg-panel: #10101c;
-  --border: rgba(255, 255, 255, 0.08);
-  --text-primary: #f5f5f7;
-  --text-secondary: #9a9ab0;
-  --purple: #7c5cff;
-  --pink: #d946ef;
-  --gradient: linear-gradient(135deg, var(--purple), var(--pink));
-  --radius: 12px;
-  --radius-lg: 18px;
-  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text-primary);
-  font-family: var(--font);
-  scroll-behavior: smooth;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0d18;
+    color: white;
+    min-height: 100vh;
 }
 
-a { text-decoration: none; color: inherit; }
-button { font-family: inherit; cursor: pointer; }
 
-/* ---------- Navbar ---------- */
+/* ================= NAVBAR ================= */
+
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
+    width: 100%;
+    padding: 28px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
 }
 
-.logo-mark {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid var(--purple);
-  position: relative;
-  flex-shrink: 0;
-}
-.logo-mark::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  background: var(--purple);
-  border-radius: 50%;
+.logo strong {
+    background: linear-gradient(90deg, #7c5cff, #d044ff);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.logo .accent { color: var(--purple); font-weight: 700; }
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.logo-circle {
+    width: 25px;
+    height: 25px;
+    border: 4px solid #8b5cf6;
+    border-radius: 50%;
+    color: #c44cff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
 }
 
-.nav-link {
-  color: var(--text-primary);
-  font-size: 15px;
-  font-weight: 500;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
-}
-.nav-link:hover { opacity: 1; }
 
-/* ---------- Buttons ---------- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 22px;
-  border-radius: 999px;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
 }
 
-.btn-primary {
-  background: var(--gradient);
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(124, 92, 255, 0.45);
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-.btn-outline {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-.btn-outline:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+.login-link:hover {
+    color: #a78bfa;
 }
 
-.btn-block { width: 100%; padding: 14px; font-size: 15.5px; }
 
-/* ---------- Hero (landing page) ---------- */
+.get-started {
+    padding: 11px 19px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #685cf6, #c342ef);
+    box-shadow: 0 8px 25px rgba(153, 77, 255, 0.35);
+}
+
+.get-started span {
+    margin-left: 8px;
+}
+
+
+/* ================= HERO ================= */
+
 .hero {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 64px 24px 40px;
-  text-align: center;
+    max-width: 1120px;
+    margin: 55px auto;
+    padding: 0 30px;
+
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 70px;
+    align-items: center;
 }
+
+
+/* ================= LEFT ================= */
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(124, 92, 255, 0.12);
-  border: 1px solid rgba(124, 92, 255, 0.3);
-  color: #c9b8ff;
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 28px;
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    background: rgba(93, 72, 180, 0.16);
+    border: 1px solid rgba(124, 92, 246, 0.35);
+
+    color: #9184ff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 28px;
 }
+
 
 .hero h1 {
-  font-size: 56px;
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 20px;
+    font-size: 57px;
+    line-height: 0.98;
+    letter-spacing: -2px;
+    max-width: 620px;
+    margin-bottom: 25px;
 }
 
-.hero h1 .grad-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.hero h1 span {
+    display: block;
+
+    background: linear-gradient(
+        90deg,
+        #8374ff,
+        #d34cff
+    );
+
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.hero p {
-  color: var(--text-secondary);
-  font-size: 17px;
-  line-height: 1.6;
-  max-width: 560px;
-  margin: 0 auto 36px;
+
+.description {
+    max-width: 560px;
+
+    color: #a6a9c0;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    margin-bottom: 28px;
 }
 
-.hero-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 36px;
+
+/* ================= BUTTONS ================= */
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 35px;
 }
 
-.hero-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  color: var(--text-secondary);
-  font-size: 14px;
+.primary-btn {
+    text-decoration: none;
+    color: white;
+
+    padding: 14px 21px;
+
+    border-radius: 28px;
+
+    background: linear-gradient(
+        90deg,
+        #685cf6,
+        #c342ef
+    );
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-shadow: 0 10px 25px rgba(120, 75, 255, 0.3);
 }
 
-.hero-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.primary-btn span {
+    margin-left: 8px;
 }
 
-.check {
-  color: #4ade80;
-  font-weight: 700;
+
+.secondary-btn {
+    text-decoration: none;
+    color: white;
+
+    padding: 13px 20px;
+
+    border-radius: 28px;
+
+    border: 1px solid #303348;
+
+    font-size: 13px;
+    font-weight: 600;
 }
 
-/* ---------- Auth pages (login / signup) ---------- */
-.auth-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.secondary-btn:hover {
+    border-color: #7567f5;
 }
 
-.auth-body {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 20px 48px 60px;
-  gap: 48px;
+
+/* ================= FEATURES ================= */
+
+.features {
+    display: flex;
+    gap: 22px;
+
+    color: #9fa3bb;
+
+    font-size: 11px;
 }
 
-.auth-copy h1 {
-  font-size: 42px;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0 0 16px;
+.features div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
 
-.auth-copy h1 .grad-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.features span {
+    color: #00d9a5;
+    font-weight: bold;
 }
 
-.auth-copy p {
-  color: var(--text-secondary);
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 380px;
+
+/* ================= MISSION CARD ================= */
+
+.mission-card {
+    background: rgba(20, 23, 40, 0.9);
+
+    border: 1px solid #22263a;
+
+    border-radius: 24px;
+
+    padding: 23px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.3);
 }
 
-.auth-footer-note {
-  color: var(--text-secondary);
-  font-size: 13px;
-  margin-top: 40px;
+
+/* HEADER */
+
+.mission-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 17px;
 }
 
-.auth-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 36px;
+.mission-header p {
+    color: #969bae;
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
-.auth-card h2 {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 6px;
+.streak {
+    color: #ffb700;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.auth-card .sub {
-  color: var(--text-secondary);
-  font-size: 14px;
-  margin: 0 0 26px;
+
+/* ================= MISSION ITEMS ================= */
+
+.mission-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 12px;
+
+    border-radius: 16px;
+
+    background: #151927;
+
+    border: 1px solid #24283a;
+
+    margin-bottom: 12px;
 }
 
-.field {
-  margin-bottom: 18px;
+.mission-item.completed {
+    border-color: rgba(0, 195, 160, 0.35);
 }
 
-.field label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 7px;
-  color: var(--text-primary);
+
+.mission-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    background: rgba(0, 211, 174, 0.12);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #00d9a5;
 }
 
-.field input {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #0d0d18;
-  color: var(--text-primary);
-  font-size: 14.5px;
-  outline: none;
-  transition: border-color 0.18s ease;
+.mission-icon.purple {
+    background: rgba(104, 92, 246, 0.12);
+    color: #8b7cff;
 }
 
-.field input:focus {
-  border-color: var(--purple);
+
+.mission-info {
+    flex: 1;
 }
 
-.field input::placeholder { color: #5c5c72; }
-
-.switch-line {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: var(--text-secondary);
+.mission-info h3 {
+    font-size: 13px;
+    margin-bottom: 4px;
 }
 
-.switch-line a {
-  color: #c9b8ff;
-  font-weight: 600;
-}
-.switch-line a:hover { text-decoration: underline; }
-
-.divider-note {
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
+.mission-info p {
+    color: #8d91a7;
+    font-size: 11px;
 }
 
-/* ---------- OTP inputs ---------- */
-.otp-inputs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
+
+.status {
+    color: #00d9a5;
+
+    width: 17px;
+    height: 17px;
+
+    border: 1px solid #00d9a5;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 10px;
 }
 
-.otp-box {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #0d0d18;
-  color: var(--text-primary);
-  outline: none;
-  transition: border-color 0.18s ease;
+.arrow {
+    color: #d0d3df;
+    font-size: 18px;
 }
 
-.otp-box:focus {
-  border-color: var(--purple);
+
+/* ================= STATS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-top: 20px;
 }
 
-@media (max-width: 480px) {
-  .otp-box { font-size: 16px; }
+.stat {
+    text-align: center;
+
+    padding: 15px 5px;
+
+    background: #191c2b;
+
+    border-radius: 10px;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 860px) {
-  .navbar { padding: 18px 20px; }
-  .hero h1 { font-size: 38px; }
-  .hero { padding: 44px 20px 30px; }
-  .auth-body {
-    grid-template-columns: 1fr;
-    padding: 10px 20px 40px;
-    gap: 32px;
-  }
-  .auth-copy { text-align: center; }
-  .auth-copy p { margin: 0 auto; }
-  .auth-copy h1 { font-size: 32px; }
+.stat h2 {
+    font-size: 17px;
+    margin-bottom: 5px;
 }
 
-@media (max-width: 480px) {
-  .hero h1 { font-size: 30px; }
-  .hero-actions { flex-direction: column; width: 100%; }
-  .hero-actions .btn { width: 100%; }
-  .auth-card { padding: 24px; }
+.stat p {
+    color: #85899f;
+    font-size: 9px;
+    letter-spacing: 1px;
 }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .mission-card {
+        max-width: 600px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 20px;
+    }
+
+    .navbar nav {
+        gap: 12px;
+    }
+
+    .get-started {
+        padding: 9px 13px;
+    }
+
+    .hero {
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .features {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .mission-card {
+        padding: 16px;
+    }
 }
