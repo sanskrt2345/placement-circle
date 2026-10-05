@@ -1,57 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome back — Placement Circle</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Placement Circle</title>
+
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/animations.css">
 </head>
+
 <body>
-  <div class="auth-shell">
 
-    <nav class="navbar">
-      <a href="../index.html" class="logo">
-        <span class="logo-mark"></span>
-        Placement <span class="accent">Circle</span>
-      </a>
-    </nav>
+    <div class="login-page">
 
-    <div class="auth-body">
-      <div class="auth-copy">
-        <h1>Prepare smarter.<br /><span class="grad-text">Every single day.</span></h1>
-        <p>Login and pick up your streak where you left off. Your dream company is 3 questions away.</p>
-        <p class="auth-footer-note">Your placement prep, in one circle.</p>
-      </div>
+        <!-- ================= LOGO ================= -->
 
-      <div class="auth-card">
-        <h2>Welcome back</h2>
-        <p class="sub">Continue your placement journey.</p>
+        <div class="logo">
+            <span class="logo-circle"></span>
 
-        <form id="login-form">
-          <div class="field">
-            <label for="login-email">College email</label>
-            <input type="email" id="login-email" name="email" placeholder="student@college.edu" required />
-          </div>
+            <span>
+                Placement <strong>Circle</strong>
+            </span>
+        </div>
 
-          <div class="field">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" name="password" placeholder="••••••••••••" required />
-          </div>
 
-          <button type="submit" class="btn btn-primary btn-block">Log in</button>
-        </form>
+        <!-- ================= LEFT SECTION ================= -->
 
-        <p class="switch-line">
-          New here? <a href="signup.html">Create an account</a>
-        </p>
+        <section class="login-left">
 
-        <p class="divider-note">Demo: student@college.edu / Student@2026</p>
-      </div>
+            <div class="left-content">
+
+                <h1>
+                    Prepare smarter.
+                    <span>Every single day.</span>
+                </h1>
+
+                <p>
+                    Login and pick up your streak where you left off.
+                    Your dream company is 3 questions away.
+                </p>
+
+            </div>
+
+
+            <div class="bottom-text">
+                Your placement prep, in one circle.
+            </div>
+
+        </section>
+
+
+        <!-- ================= RIGHT SECTION ================= -->
+
+        <section class="login-right">
+
+            <div class="login-form-container">
+
+                <h2>Welcome back</h2>
+
+                <p class="subtitle">
+                    Continue your placement journey.
+                </p>
+
+
+                <!-- ================= LOGIN FORM ================= -->
+
+                <form id="loginForm">
+
+                    <!-- COLLEGE EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            College email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your college email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                    >
+                        Log in
+                    </button>
+
+                </form>
+
+
+                <!-- ================= SIGNUP LINK ================= -->
+
+                <p class="signup-text">
+
+                    New here?
+
+                    <a href="signup.html">
+                        Create an account
+                    </a>
+
+                </p>
+
+
+                <div class="divider"></div>
+
+            </div>
+
+        </section>
+
     </div>
-  </div>
 
-  <script src="../js/script.js"></script>
+
+    <!-- LOGIN JS -->
+
+    <script src="../js/login.js"></script>
+
+<script src="../js/animations.js"></script>
+
 </body>
+
 </html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - Placement Circle</title>
+
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+
+                <div class="logo-text">
+                    Placement <span>Circle</span>
+                </div>
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="daily-prep.html" class="nav-item">
+                    <span class="nav-icon">ϟ</span>
+                    <span>Daily Prep</span>
+                </a>
+
+                <a href="practice.html" class="nav-item">
+                    <span class="nav-icon">▣</span>
+                    <span>Practice</span>
+                </a>
+
+                <a href="internships.html" class="nav-item">
+                    <span class="nav-icon">▤</span>
+                    <span>Internships</span>
+                </a>
+
+                <a href="alumni.html" class="nav-item">
+                    <span class="nav-icon">♧</span>
+                    <span>Alumni</span>
+                </a>
+
+                <a href="leaderboard.html" class="nav-item">
+                    <span class="nav-icon">♜</span>
+                    <span>Leaderboard</span>
+                </a>
+
+                <a href="progress.html" class="nav-item">
+                    <span class="nav-icon">⌁</span>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-item active">
+                    <span class="nav-icon">♙</span>
+                    <span>Profile</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button class="bottom-item" id="themeBtn">
+                    <span>☼</span>
+                    <span>Light mode</span>
+                </button>
+
+                <button class="bottom-item" id="logoutBtn">
+                    <span>↪</span>
+                    <span>Log out</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div class="topbar-right">
+
+                    <button class="notification">♧</button>
+
+                    <div class="profile">
+
+                        <div class="avatar">AA</div>
+
+                        <div class="profile-info">
+                            <strong>Aarav Patel</strong>
+                            <span>CSE · Final Year</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <!-- HERO -->
+                <div class="panel hero">
+
+                    <div class="big-avatar">AA</div>
+
+                    <div class="hero-info">
+                        <h1>Aarav Patel</h1>
+
+                        <div class="college">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                            IIT Delhi · CSE · Final Year
+                        </div>
+
+                        <div class="target-tags" id="targetTags"></div>
+                    </div>
+
+                    <div class="hero-stats" id="heroStats"></div>
+
+                </div>
+
+                <!-- CONTRIBUTION ACTIVITY -->
+                <div class="panel">
+                    <h3>Contribution activity</h3>
+                    <div class="heatmap" id="heatmap"></div>
+                </div>
+
+                <!-- ACHIEVEMENTS -->
+                <div class="panel">
+                    <h3>Achievements</h3>
+                    <div class="badge-grid" id="badgeGrid"></div>
+                </div>
+
+                <!-- PREFERENCES -->
+                <div class="panel">
+                    <h3>Preferences</h3>
+                    <div id="prefs"></div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/profile.js"></script>
+
+<script src="../js/animations.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,428 @@
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080b14;
+    color: white;
+    min-height: 100vh;
+}
+
+
+/* ================= MAIN PAGE ================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-columns: 58% 42%;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 8% 8%,
+            rgba(124, 92, 255, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 85%,
+            rgba(194, 57, 255, 0.12),
+            transparent 32%
+        ),
+        #080b14;
+}
+
+
+/* ================= LOGO ================= */
+
+.logo {
+    position: absolute;
+
+    top: 42px;
+    left: 40px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    z-index: 5;
+}
+
+.logo strong {
+    background: linear-gradient(
+        90deg,
+        #8b7cff,
+        #d044ef
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.logo-circle {
+    width: 24px;
+    height: 24px;
+
+    border: 3px solid #8b5cf6;
+    border-radius: 50%;
+
+    position: relative;
+}
+
+.logo-circle::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #c044ef;
+
+    top: 5px;
+    left: 5px;
+}
+
+
+/* ================= LEFT SIDE ================= */
+
+.login-left {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 80px 50px 80px 40px;
+
+    position: relative;
+}
+
+
+/* subtle glow */
+
+.login-left::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: 90px;
+    top: 190px;
+
+    background: rgba(20, 120, 160, 0.10);
+
+    filter: blur(100px);
+
+    border-radius: 50%;
+}
+
+
+/* ================= LEFT CONTENT ================= */
+
+.left-content {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 560px;
+
+    margin-top: 15px;
+}
+
+.left-content h1 {
+    font-size: 34px;
+    line-height: 1.18;
+
+    font-weight: 700;
+
+    margin-bottom: 13px;
+
+    letter-spacing: -1.3px;
+}
+
+.left-content h1 span {
+    display: block;
+
+    background: linear-gradient(
+        90deg,
+        #8b7cff,
+        #d44cff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.left-content p {
+    max-width: 450px;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+    color: #8fa1bf;
+}
+
+
+/* ================= BOTTOM TEXT ================= */
+
+.bottom-text {
+    position: absolute;
+
+    left: 40px;
+    bottom: 37px;
+
+    font-size: 11px;
+
+    color: #8fa1bf;
+}
+
+
+/* ================= RIGHT SIDE ================= */
+
+.login-right {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 70px 70px 60px 5px;
+}
+
+
+/* ================= FORM ================= */
+
+.login-form-container {
+    width: 100%;
+    max-width: 350px;
+
+    margin-top: 5px;
+}
+
+
+/* ================= HEADING ================= */
+
+.login-form-container h2 {
+    font-size: 23px;
+    line-height: 1.2;
+
+    margin-bottom: 5px;
+
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 13px;
+    line-height: 1.5;
+
+    color: #8fa1bf;
+
+    margin-bottom: 27px;
+}
+
+
+/* ================= FORM GROUP ================= */
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+.form-group input {
+    display: block;
+
+    width: 100%;
+    height: 34px;
+
+    padding: 0 12px;
+
+    border: 1px solid #293244;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #090d16;
+
+    color: white;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #5e6b82;
+}
+
+.form-group input:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 2px rgba(139, 92, 246, 0.10);
+}
+
+
+/* ================= LOGIN BUTTON ================= */
+
+.login-btn {
+    display: block;
+
+    width: 100%;
+    height: 40px;
+
+    border: none;
+    border-radius: 22px;
+
+    background: linear-gradient(
+        90deg,
+        #6961f5,
+        #d13ce6
+    );
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 25px rgba(154, 73, 240, 0.25);
+}
+
+
+/* ================= SIGNUP LINK ================= */
+
+.signup-text {
+    text-align: center;
+
+    margin-top: 24px;
+
+    font-size: 12px;
+
+    color: #8fa1bf;
+}
+
+.signup-text a {
+    color: #8b72ff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.signup-text a:hover {
+    color: #c04bef;
+
+    text-decoration: underline;
+}
+
+
+/* ================= DIVIDER ================= */
+
+.divider {
+    width: 100%;
+
+    height: 1px;
+
+    margin-top: 25px;
+
+    background: #252c3a;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 850px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-left {
+        min-height: 42vh;
+
+        padding: 120px 30px 40px;
+
+        align-items: center;
+    }
+
+    .login-right {
+        min-height: auto;
+
+        padding: 30px 30px 60px;
+
+        justify-content: center;
+    }
+
+    .login-form-container {
+        max-width: 360px;
+    }
+
+    .left-content {
+        margin-top: 0;
+    }
+
+    .left-content h1 {
+        font-size: 30px;
+    }
+
+    .bottom-text {
+        display: none;
+    }
+
+    .logo {
+        left: 30px;
+        top: 30px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .login-right {
+        padding: 25px 20px 50px;
+    }
+
+    .login-form-container {
+        max-width: 100%;
+    }
+
+    .left-content h1 {
+        font-size: 28px;
+    }
+}

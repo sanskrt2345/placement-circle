@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Progress - Placement Circle</title>
+
+    <link rel="stylesheet" href="../css/progress.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+
+                <div class="logo-text">
+                    Placement <span>Circle</span>
+                </div>
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="daily-prep.html" class="nav-item">
+                    <span class="nav-icon">ϟ</span>
+                    <span>Daily Prep</span>
+                </a>
+
+                <a href="practice.html" class="nav-item">
+                    <span class="nav-icon">▣</span>
+                    <span>Practice</span>
+                </a>
+
+                <a href="internships.html" class="nav-item">
+                    <span class="nav-icon">▤</span>
+                    <span>Internships</span>
+                </a>
+
+                <a href="alumni.html" class="nav-item">
+                    <span class="nav-icon">♧</span>
+                    <span>Alumni</span>
+                </a>
+
+                <a href="leaderboard.html" class="nav-item">
+                    <span class="nav-icon">♜</span>
+                    <span>Leaderboard</span>
+                </a>
+
+                <a href="progress.html" class="nav-item active">
+                    <span class="nav-icon">⌁</span>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">♙</span>
+                    <span>Profile</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button class="bottom-item" id="themeBtn">
+                    <span>☼</span>
+                    <span>Light mode</span>
+                </button>
+
+                <button class="bottom-item" id="logoutBtn">
+                    <span>↪</span>
+                    <span>Log out</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div class="topbar-right">
+
+                    <button class="notification">♧</button>
+
+                    <div class="profile">
+
+                        <div class="avatar">AA</div>
+
+                        <div class="profile-info">
+                            <strong>Aarav Patel</strong>
+                            <span>CSE · Final Year</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <div class="page-header">
+                    <h1>Your Progress</h1>
+                    <p>You are getting stronger — here's proof.</p>
+                </div>
+
+                <!-- ROW 1 -->
+                <div class="grid top">
+
+                    <div class="card score-card">
+                        <div class="ring" id="ring"></div>
+                        <div class="mini-stats" id="miniStats"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Weekly activity</h3>
+                        <div id="weeklyChart"></div>
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="grid two">
+
+                    <div class="card">
+                        <h3>Accuracy by category</h3>
+                        <div class="h-chart" id="accuracyChart"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Difficulty mix</h3>
+                        <div class="donut-wrap" id="difficultyChart"></div>
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="grid two">
+
+                    <div class="card">
+                        <h3 class="with-dot"><i class="dot red"></i>Weak areas</h3>
+                        <ul class="topic-list" id="weakList"></ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="with-dot"><i class="dot green"></i>Strong areas</h3>
+                        <ul class="topic-list" id="strongList"></ul>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/progress.js"></script>
+
+<script src="../js/animations.js"></script>
+
+</body>
+
+</html>
