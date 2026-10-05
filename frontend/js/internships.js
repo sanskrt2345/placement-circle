@@ -3,106 +3,19 @@
 ===================================================== */
 
 /* =====================================================
-   DATA  (apna data yahan edit / add kar sakte ho)
+   DATA  (loaded from the backend: GET /api/opportunities)
    type     : "internship" ya "job"
    daysLeft : 0 = "Closing today", baaki = "N days left"
 ===================================================== */
 
-const opportunities = [
-    {
-        title: "Digital Cadre",
-        company: "TCS",
-        type: "job",
-        location: "Pan India",
-        pay: "₹7.5 LPA",
-        description: "Fast-track programme for high performers.",
-        eligibility: "Final year",
-        daysLeft: 0,
-        link: "https://www.tcs.com/careers"
-    },
-    {
-        title: "SDE Intern",
-        company: "Amazon",
-        type: "internship",
-        location: "Bengaluru",
-        pay: "₹90,000/month",
-        description: "Build customer-obsessed products at scale.",
-        eligibility: "Final year B.Tech",
-        daysLeft: 0,
-        link: "https://www.amazon.jobs"
-    },
-    {
-        title: "Software Engineering Intern",
-        company: "Google",
-        type: "internship",
-        location: "Bengaluru",
-        pay: "₹1,00,000/month",
-        description: "Work with Google engineers on real production systems. Areas: Search, Ads, Cloud.",
-        eligibility: "3rd/Final year B.Tech CSE/IT",
-        daysLeft: 0,
-        link: "https://www.google.com/about/careers/"
-    },
-    {
-        title: "SDE-1 (Full-time)",
-        company: "Flipkart",
-        type: "job",
-        location: "Bengaluru",
-        pay: "₹28 LPA",
-        description: "Own the largest e-commerce stack in India.",
-        eligibility: "Final year B.Tech / M.Tech",
-        daysLeft: 0,
-        link: "https://www.flipkartcareers.com"
-    },
-    {
-        title: "Explore Program (SDE Intern)",
-        company: "Microsoft",
-        type: "internship",
-        location: "Hyderabad",
-        pay: "₹80,000/month",
-        description: "12-week rotational program across PM, SDE and Design.",
-        eligibility: "2nd year B.Tech",
-        daysLeft: 0,
-        link: "https://careers.microsoft.com"
-    },
-    {
-        title: "Consulting Analyst",
-        company: "Deloitte",
-        type: "job",
-        location: "Mumbai",
-        pay: "₹9 LPA",
-        description: "Advise Fortune 500 clients on strategy and operations.",
-        eligibility: "Final year",
-        daysLeft: 0,
-        link: "https://www.deloitte.com/global/en/careers.html"
-    },
-    {
-        title: "Engineering Intern",
-        company: "Atlassian",
-        type: "internship",
-        location: "Remote",
-        pay: "$3,500/month",
-        description: "Work fully remote with the Jira / Confluence teams.",
-        eligibility: "Any year",
-        daysLeft: 0,
-        link: "https://www.atlassian.com/company/careers"
-    },
-    {
-        title: "Product Intern",
-        company: "Adobe",
-        type: "internship",
-        location: "Noida",
-        pay: "₹70,000/month",
-        description: "Ship features used by millions of creators worldwide.",
-        eligibility: "Pre-final year",
-        daysLeft: 4,
-        link: "https://www.adobe.com/careers.html"
-    }
-];
+let opportunities = [];   // filled from GET /api/opportunities
 
 
 /* =====================================================
    ICONS (inline SVG)
 ===================================================== */
+
+const esc = Api.esc;
 
 const icons = {
     company:
@@ -149,22 +62,22 @@ function cardHTML(item) {
         <article class="opp-card">
 
             <div class="card-top">
-                <div class="company-logo">${item.company.charAt(0)}</div>
+                <div class="company-logo">${esc(item.company.charAt(0))}</div>
                 ${deadlineBadge(item.daysLeft)}
             </div>
 
-            <h3 class="opp-title">${item.title}</h3>
+            <h3 class="opp-title">${esc(item.title)}</h3>
 
-            <div class="meta company">${icons.company}<span>${item.company}</span></div>
-            <div class="meta">${icons.location}<span>${item.location}</span></div>
-            <div class="meta">${icons.pay}<span>${item.pay}</span></div>
+            <div class="meta company">${icons.company}<span>${esc(item.company)}</span></div>
+            <div class="meta">${icons.location}<span>${esc(item.location)}</span></div>
+            <div class="meta">${icons.pay}<span>${esc(item.pay)}</span></div>
 
-            <p class="opp-desc">${item.description}</p>
+            <p class="opp-desc">${esc(item.description)}</p>
 
             <div class="card-bottom">
-                <span class="eligibility">${item.eligibility}</span>
+                <span class="eligibility">${esc(item.eligibility)}</span>
 
-                <a class="view-btn" href="${item.link}" target="_blank" rel="noopener noreferrer">
+                <a class="view-btn" href="${esc(Api.safeUrl(item.link))}" target="_blank" rel="noopener noreferrer">
                     View ${icons.external}
                 </a>
             </div>
@@ -228,7 +141,7 @@ searchInput.addEventListener("input", render);
 /* LOGOUT */
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
-    window.location.href = "login.html";
+    Api.logout();
 });
 
 
@@ -253,5 +166,14 @@ scrollTopBtn.addEventListener("click", function () {
 
 
 /* INITIAL LOAD */
+searchInput.value = Api.param("q");
 
-render();
+Api.get("/api/opportunities")
+    .then(function (data) {
+        opportunities = data.opportunities;
+        render();
+    })
+    .catch(function (err) {
+        emptyState.textContent = err.message;
+        emptyState.classList.add("show");
+    });

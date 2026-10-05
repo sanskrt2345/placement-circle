@@ -3,51 +3,10 @@
 ===================================================== */
 
 /* =====================================================
-   DATA  (apna data yahan edit / add kar sakte ho)
+   DATA  (loaded from the backend: GET /api/experiences)
 ===================================================== */
 
-const experiences = [
-    {
-        company: "Google",
-        role: "SDE-1",
-        status: "Offer",
-        name: "Ananya Kapoor",
-        year: 2025,
-        rounds: ["Online Assessment", "Technical Round 1", "Technical Round 2", "Googleyness & HR"],
-        tip: "Consistency > intensity. Solve one meaningful problem a day for 6 months and you'll be ready.",
-        full: "I started preparing in my third year and kept a simple rule: one problem a day, then write down the pattern I learned. In interviews, I talked through brute force first, then improved it step by step. The Googleyness round was a normal conversation about teamwork and how I handle ambiguity."
-    },
-    {
-        company: "Microsoft",
-        role: "SDE Intern",
-        status: "Offer",
-        name: "Rahul Verma",
-        year: 2026,
-        rounds: ["OA", "Group Discussion", "Technical + HR"],
-        tip: "Speak your thought process out loud. Interviewers care more about approach than the final code.",
-        full: "The OA had two coding questions and a few MCQs. The group discussion was on a current tech topic and was more about how you listen than how loud you are. In the technical round, I explained my approach before typing anything, and the interviewer helped when I got stuck."
-    },
-    {
-        company: "Amazon",
-        role: "SDE-1",
-        status: "Offer",
-        name: "Priya Sharma",
-        year: 2025,
-        rounds: ["Online Assessment", "Technical Round", "Bar Raiser"],
-        tip: "Bar Raiser is the hardest round — practice behavioral with a friend at least 5 times.",
-        full: "Prepare 6 to 8 stories from your projects and college life, and map each one to the Amazon leadership principles. Use the STAR format and always say what YOU did, not what the team did. The Bar Raiser asked follow-ups on every story, so know the details."
-    },
-    {
-        company: "Adobe",
-        role: "MTS-1",
-        status: "Offer",
-        name: "Karthik Reddy",
-        year: 2024,
-        rounds: ["Online Test", "Technical Round", "Managerial + HR"],
-        tip: "Have one project you can explain end-to-end for 20 minutes without hesitation.",
-        full: "They went deep on my main project: why I chose the tech stack, what broke, and how I fixed it. Revise your core subjects too (OS, DBMS, OOP). The managerial round was relaxed and focused on learning ability and career goals."
-    }
-];
+let experiences = [];   // filled from GET /api/experiences
 
 
 /* =====================================================
@@ -79,7 +38,7 @@ function cardHTML(item, index) {
     }).join("");
 
     return `
-        <article class="story-card" data-index="${index}">
+        <article class="story-card" data-id="${item.id}">
 
             <div class="story-top">
 
@@ -105,7 +64,7 @@ function cardHTML(item, index) {
             <p class="story-full">${escapeHTML(item.full || item.tip)}</p>
 
             <div class="story-bottom">
-                <button class="helpful-btn" type="button">${thumbIcon}<span>Helpful</span></button>
+                <button class="helpful-btn${item.helpful ? " active" : ""}" type="button">${thumbIcon}<span>Helpful${item.helpfulCount ? " · " + item.helpfulCount : ""}</span></button>
                 <button class="read-btn" type="button"><span class="read-label">Read full</span> ${arrowIcon}</button>
             </div>
 
@@ -156,7 +115,18 @@ cardsGrid.addEventListener("click", function (e) {
     const read = e.target.closest(".read-btn");
 
     if (helpful) {
-        helpful.classList.toggle("active");
+        const id = helpful.closest(".story-card").dataset.id;
+        helpful.disabled = true;
+        Api.post("/api/experiences/" + id + "/helpful")
+            .then(function (r) {
+                helpful.classList.toggle("active", r.helpful);
+                helpful.querySelector("span").textContent =
+                    "Helpful" + (r.helpfulCount ? " · " + r.helpfulCount : "");
+                const item = experiences.find(function (x) { return String(x.id) === String(id); });
+                if (item) { item.helpful = r.helpful; item.helpfulCount = r.helpfulCount; }
+            })
+            .catch(function (err) { alert(err.message); })
+            .then(function () { helpful.disabled = false; });
     }
 
     if (read) {
@@ -227,6 +197,7 @@ document.getElementById("submitModal").addEventListener("click", function () {
     const tip = fields.tip.value.trim();
 
     if (!company || !role || !name || !tip) {
+        formError.textContent = "Please fill company, role, your name and your tip.";
         formError.classList.add("show");
         return;
     }
@@ -236,21 +207,36 @@ document.getElementById("submitModal").addEventListener("click", function () {
         .map(function (r) { return r.trim(); })
         .filter(Boolean);
 
-    // TODO: backend aane par yahan API call (POST) karna hai.
-    experiences.unshift({
+    const payload = {
         company: company,
         role: role,
-        status: fields.status.value,
         name: name,
-        year: fields.year.value || new Date().getFullYear(),
+        status: fields.status.value,
         rounds: rounds,
-        tip: tip,
-        full: tip
-    });
+        tip: tip
+    };
 
-    searchInput.value = "";
-    closeModal();
-    render();
+    if (fields.year.value) {
+        payload.year = Number(fields.year.value);
+    }
+
+    const submitButton = document.getElementById("submitModal");
+    Api.busy(submitButton, true, "Sharing...");
+
+    Api.post("/api/experiences", payload)
+        .then(function (data) {
+            experiences.unshift(data.experience);
+            searchInput.value = "";
+            closeModal();
+            render();
+        })
+        .catch(function (err) {
+            formError.textContent = err.message;
+            formError.classList.add("show");
+        })
+        .then(function () {
+            Api.busy(submitButton, false);
+        });
 });
 
 
@@ -259,7 +245,7 @@ document.getElementById("submitModal").addEventListener("click", function () {
 ===================================================== */
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
-    window.location.href = "login.html";
+    Api.logout();
 });
 
 document.getElementById("themeBtn").addEventListener("click", function () {
@@ -268,5 +254,14 @@ document.getElementById("themeBtn").addEventListener("click", function () {
 
 
 /* INITIAL LOAD */
+searchInput.value = Api.param("q");
 
-render();
+Api.get("/api/experiences")
+    .then(function (data) {
+        experiences = data.experiences;
+        render();
+    })
+    .catch(function (err) {
+        emptyState.textContent = err.message;
+        emptyState.classList.add("show");
+    });

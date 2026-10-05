@@ -3,29 +3,10 @@
 ===================================================== */
 
 /* =====================================================
-   DATA  (apna data yahan edit kar sakte ho)
+   DATA  (loaded from the backend: GET /api/profile)
 ===================================================== */
 
-const profile = {
-    targetCompanies: ["Google", "Microsoft", "Adobe"],
-    streak: 12,
-    points: 1240,
-    solved: 0,
-    preferences: [
-        ["Goal", "Software Engineering"],
-        ["Level", "Intermediate"],
-        ["Focus", "DSA, Aptitude, HR Interviews"]
-    ]
-};
-
-const achievements = [
-    { title: "7 Day Streak", unlocked: true },
-    { title: "50 Questions", unlocked: false },
-    { title: "DSA Warrior", unlocked: true },
-    { title: "Aptitude Ace", unlocked: true },
-    { title: "Interview Ready", unlocked: true },
-    { title: "Consistency King", unlocked: true }
-];
+let profile = null;   // filled from GET /api/profile
 
 
 /* =====================================================
@@ -42,84 +23,97 @@ const icons = {
 };
 
 
+const esc = Api.esc;
+
 /* =====================================================
-   1. TARGET COMPANIES + STAT TILES
+   1. HERO: NAME, COLLEGE, TARGET COMPANIES + STAT TILES
 ===================================================== */
 
-document.getElementById("targetTags").innerHTML =
-    profile.targetCompanies.map(function (c) {
-        return "<span>" + c + "</span>";
+function renderHero(data) {
+
+    document.getElementById("bigAvatar").textContent = data.user.initials;
+    document.getElementById("profileName").textContent = data.user.fullName;
+    document.getElementById("profileCollege").textContent =
+        [data.user.college, data.user.branch, data.user.year].filter(Boolean).join(" · ") || "Add your college details";
+
+    document.getElementById("targetTags").innerHTML =
+        data.targetCompanies.length
+            ? data.targetCompanies.map(function (c) {
+                return "<span>" + esc(c) + "</span>";
+            }).join("")
+            : "<span>No target companies yet</span>";
+
+    document.getElementById("heroStats").innerHTML = [
+        [icons.streak, data.stats.streak, "STREAK"],
+        [icons.points, data.stats.points, "POINTS"],
+        [icons.solved, data.stats.solved, "SOLVED"]
+    ].map(function (t) {
+        return '<div class="stat-tile">' + t[0] + "<strong>" + t[1] + "</strong><span>" + t[2] + "</span></div>";
     }).join("");
-
-document.getElementById("heroStats").innerHTML = [
-    [icons.streak, profile.streak, "STREAK"],
-    [icons.points, profile.points, "POINTS"],
-    [icons.solved, profile.solved, "SOLVED"]
-].map(function (t) {
-    return '<div class="stat-tile">' + t[0] + "<strong>" + t[1] + "</strong><span>" + t[2] + "</span></div>";
-}).join("");
+}
 
 
 /* =====================================================
-   2. CONTRIBUTION HEATMAP
-   (demo data: har baar same dikhta hai. Real data aane par
-   levels array backend se bhar dena: 0 = koi activity nahi,
-   1-4 = zyada activity)
+   2. CONTRIBUTION HEATMAP  (real activity from the last 24 weeks)
+   level 0 = no activity, 1-4 = more activity
 ===================================================== */
 
-(function renderHeatmap() {
+function renderHeatmap(heatmap) {
 
-    const weeks = 24;
-    const days = 7;
-
-    // chhota seeded random, taki page refresh pe pattern na badle
-    let seed = 7;
-    function rand() {
-        seed = (seed * 9301 + 49297) % 233280;
-        return seed / 233280;
-    }
-
-    let html = "";
-
-    for (let i = 0; i < weeks * days; i++) {
-
-        const r = rand();
-        let level = 0;
-
-        if (r > 0.45) level = 1;
-        if (r > 0.65) level = 2;
-        if (r > 0.82) level = 3;
-        if (r > 0.93) level = 4;
-
-        html += '<div class="heat-cell l' + level + '"></div>';
-    }
-
-    document.getElementById("heatmap").innerHTML = html;
-})();
+    document.getElementById("heatmap").innerHTML = heatmap.cells.map(function (cell) {
+        const label = cell.future
+            ? ""
+            : cell.date + ": " + cell.count + (cell.count === 1 ? " attempt" : " attempts");
+        return '<div class="heat-cell l' + cell.level + '" title="' + esc(label) + '"></div>';
+    }).join("");
+}
 
 
 /* =====================================================
    3. ACHIEVEMENTS
 ===================================================== */
 
-document.getElementById("badgeGrid").innerHTML =
-    achievements.map(function (a) {
+function renderAchievements(list) {
+
+    document.getElementById("badgeGrid").innerHTML = list.map(function (a) {
         return `
-            <div class="badge-card${a.unlocked ? "" : " locked"}">
-                <strong>${a.title}</strong>
+            <div class="badge-card${a.unlocked ? "" : " locked"}" title="${esc(a.description)}">
+                <strong>${esc(a.title)}</strong>
                 <span>${a.unlocked ? "Unlocked" : "Locked"}</span>
             </div>`;
     }).join("");
+}
 
 
 /* =====================================================
    4. PREFERENCES
 ===================================================== */
 
-document.getElementById("prefs").innerHTML =
-    profile.preferences.map(function (p) {
-        return '<div class="pref-line"><b>' + p[0] + ":</b> " + p[1] + "</div>";
+function renderPrefs(prefs) {
+
+    const lines = [
+        ["Goal", prefs.goal || "Not set"],
+        ["Level", prefs.level || "Not set"],
+        ["Focus", prefs.focus.length ? prefs.focus.join(", ") : "Not set"]
+    ];
+
+    document.getElementById("prefs").innerHTML = lines.map(function (p) {
+        return '<div class="pref-line"><b>' + p[0] + ":</b> " + esc(p[1]) + "</div>";
     }).join("");
+}
+
+
+Api.get("/api/profile")
+    .then(function (data) {
+        profile = data;
+        renderHero(data);
+        renderHeatmap(data.heatmap);
+        renderAchievements(data.achievements);
+        renderPrefs(data.preferences);
+    })
+    .catch(function (err) {
+        document.getElementById("profileName").textContent = err.message;
+    });
 
 
 /* =====================================================
@@ -127,7 +121,7 @@ document.getElementById("prefs").innerHTML =
 ===================================================== */
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
-    window.location.href = "login.html";
+    Api.logout();
 });
 
 document.getElementById("themeBtn").addEventListener("click", function () {

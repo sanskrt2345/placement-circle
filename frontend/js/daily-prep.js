@@ -1,10 +1,11 @@
 /* =========================================================
    DAILY PREP JAVASCRIPT
+   Today's 3 questions come from GET /api/daily
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const startButtons = document.querySelectorAll(".start-btn");
+    const grid = document.getElementById("questionGrid");
 
     const completedCount =
         document.getElementById("completedCount");
@@ -18,49 +19,68 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn =
         document.getElementById("logoutBtn");
 
+    const esc = Api.esc;
+
 
     /* =====================================================
-       START QUESTION
+       RENDER TODAY'S QUESTIONS
        ===================================================== */
 
-    startButtons.forEach(function (button) {
+    function cardHTML(q) {
 
-        button.addEventListener("click", function () {
+        return `
+            <article class="question-card">
+                <div class="card-top">
+                    <span class="category">${esc(q.category)}</span>
+                    <span class="arrow">${q.solved ? "✓" : "›"}</span>
+                </div>
+                <h2>${esc(q.title)}</h2>
+                <div class="question-meta">
+                    <span>${esc(q.difficulty)}</span>
+                    <span class="dot">•</span>
+                    <span class="clock">◷</span>
+                    <span>${q.timeMinutes} min</span>
+                </div>
+                <button class="start-btn" data-id="${q.id}">
+                    ${q.solved ? "Review" : "Start"} <span>›</span>
+                </button>
+            </article>`;
+    }
 
-            const question =
-                button.dataset.question;
+    function render(mission) {
 
-            const type =
-                button.dataset.type;
+        completedCount.textContent = mission.completed;
 
-            /*
-             * For now we store the selected question.
-             * Later this can be connected to the backend.
-             */
+        missionStatus.textContent = mission.done
+            ? "All done! +" + mission.bonusPoints + " bonus"
+            : mission.remaining + " left";
 
-            localStorage.setItem(
-                "selectedQuestion",
-                question
-            );
+        grid.innerHTML = mission.questions.length
+            ? mission.questions.map(cardHTML).join("")
+            : '<p style="opacity:.65">No questions available yet. Check back soon.</p>';
+    }
 
-            localStorage.setItem(
-                "selectedQuestionType",
-                type
-            );
-
-
-            /*
-             * Temporary navigation.
-             *
-             * Later:
-             * daily-question.html
-             */
-
-            window.location.href =
-                "daily-question.html";
-
+    Api.get("/api/daily")
+        .then(render)
+        .catch(function (err) {
+            grid.innerHTML = '<p style="opacity:.75">' + esc(err.message) + "</p>";
         });
 
+
+    /* =====================================================
+       START QUESTION  (cards are rendered later, so listen on the grid)
+       ===================================================== */
+
+    grid.addEventListener("click", function (event) {
+
+        const button = event.target.closest(".start-btn");
+
+        if (!button) {
+            return;
+        }
+
+        window.location.href =
+            "question.html?id=" + button.dataset.id;
     });
 
 
@@ -124,54 +144,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         logoutBtn.addEventListener("click", function () {
 
-            const confirmLogout =
-                confirm("Are you sure you want to log out?");
+            if (confirm("Are you sure you want to log out?")) {
 
-            if (confirmLogout) {
-
-                window.location.href =
-                    "login.html";
+                Api.logout();
 
             }
 
         });
 
     }
-
-
-    /* =====================================================
-       MISSION DISPLAY
-       ===================================================== */
-
-    function updateMission() {
-
-        let completed =
-            Number(localStorage.getItem("dailyCompleted")) || 0;
-
-        if (completed > 3) {
-            completed = 3;
-        }
-
-        if (completedCount) {
-
-            completedCount.textContent =
-                completed;
-
-        }
-
-        if (missionStatus) {
-
-            const left =
-                3 - completed;
-
-            missionStatus.textContent =
-                left + (left === 1 ? " left" : " left");
-
-        }
-
-    }
-
-
-    updateMission();
 
 });
