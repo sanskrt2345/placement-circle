@@ -1,67 +1,27 @@
 /* =====================================================
    PROGRESS JAVASCRIPT
-   (charts SVG / CSS se bane hain, koi library nahi chahiye)
+   All numbers come from GET /api/progress.
+   (charts are drawn with SVG / CSS, no library needed)
 ===================================================== */
 
-/* =====================================================
-   DATA  (apna data yahan edit kar sakte ho)
-===================================================== */
+const esc = Api.esc;
 
-const stats = {
-    prepScore: 54,
-    solved: 0,
-    accuracy: 72,
-    streak: 12,
-    points: 1240
-};
-
-// Mon se Sun tak: din mein kitne questions solve kiye
-const weekly = [
-    { day: "Mon", value: 0 },
-    { day: "Tue", value: 0 },
-    { day: "Wed", value: 0 },
-    { day: "Thu", value: 0 },
-    { day: "Fri", value: 0 },
-    { day: "Sat", value: 0 },
-    { day: "Sun", value: 0 }
-];
-
-const categoryAccuracy = [
-    { name: "Aptitude", value: 63 },
-    { name: "DSA", value: 63 },
-    { name: "HR", value: 100 }
-];
-
-const difficulty = [
-    { name: "Easy", value: 19, color: "#6366f1" },
-    { name: "Hard", value: 7, color: "#10b981" },
-    { name: "Medium", value: 34, color: "#22d3ee" }
-];
-
-const weakAreas = [
-    { name: "Dynamic Programming", value: 33 },
-    { name: "Graphs", value: 33 },
-    { name: "Probability", value: 33 }
-];
-
-const strongAreas = [
-    { name: "Behavioral", value: 100 },
-    { name: "Interview Questions", value: 100 },
-    { name: "Strings", value: 100 }
-];
+function setHTML(id, html) {
+    document.getElementById(id).innerHTML = html;
+}
 
 
 /* =====================================================
    1. PREP SCORE RING + MINI STATS
 ===================================================== */
 
-(function renderRing() {
+function renderRing(stats) {
 
     const r = 40;
     const circumference = 2 * Math.PI * r;
     const offset = circumference * (1 - stats.prepScore / 100);
 
-    document.getElementById("ring").innerHTML = `
+    setHTML("ring", `
         <svg viewBox="0 0 100 100">
             <defs>
                 <linearGradient id="ringGradient" x1="0" y1="0" x2="1" y2="1">
@@ -78,7 +38,7 @@ const strongAreas = [
             <strong>${stats.prepScore}%</strong>
             <span>PREP SCORE</span>
         </div>
-    `;
+    `);
 
     const items = [
         [stats.solved, "SOLVED"],
@@ -87,17 +47,17 @@ const strongAreas = [
         [stats.points, "POINTS"]
     ];
 
-    document.getElementById("miniStats").innerHTML = items.map(function (it) {
+    setHTML("miniStats", items.map(function (it) {
         return "<div><strong>" + it[0] + "</strong><span>" + it[1] + "</span></div>";
-    }).join("");
-})();
+    }).join(""));
+}
 
 
 /* =====================================================
    2. WEEKLY ACTIVITY (vertical bars)
 ===================================================== */
 
-(function renderWeekly() {
+function renderWeekly(weekly) {
 
     const max = Math.max(4, ...weekly.map(function (w) { return w.value; }));
 
@@ -109,34 +69,34 @@ const strongAreas = [
     }).join("");
 
     const bars = weekly.map(function (w) {
-        return '<div class="v-bar" title="' + w.day + ": " + w.value +
+        return '<div class="v-bar" title="' + esc(w.day) + ": " + w.value +
                ' solved" style="height:' + (w.value / max * 100) + '%"></div>';
     }).join("");
 
-    document.getElementById("weeklyChart").innerHTML = `
+    setHTML("weeklyChart", `
         <div class="chart-wrap">
             <div class="y-axis">${ticks.map(function (t) { return "<span>" + t + "</span>"; }).join("")}</div>
             <div class="plot-col">
                 <div class="plot">${lines}${bars}</div>
-                <div class="x-axis">${weekly.map(function (w) { return "<span>" + w.day + "</span>"; }).join("")}</div>
+                <div class="x-axis">${weekly.map(function (w) { return "<span>" + esc(w.day) + "</span>"; }).join("")}</div>
             </div>
         </div>
-    `;
-})();
+    `);
+}
 
 
 /* =====================================================
    3. ACCURACY BY CATEGORY (horizontal bars)
 ===================================================== */
 
-(function renderAccuracy() {
+function renderAccuracy(categoryAccuracy) {
 
     const rows = categoryAccuracy.map(function (c) {
         return `
             <div class="h-row">
-                <div class="h-label">${c.name}</div>
+                <div class="h-label">${esc(c.name)}</div>
                 <div class="h-track">
-                    <div class="h-bar" title="${c.name}: ${c.value}%" style="width:${c.value}%"></div>
+                    <div class="h-bar" title="${esc(c.name)}: ${c.value}%" style="width:${c.value}%"></div>
                 </div>
             </div>`;
     }).join("");
@@ -145,48 +105,44 @@ const strongAreas = [
         return '<span style="left:' + n + '%">' + n + "</span>";
     }).join("");
 
-    document.getElementById("accuracyChart").innerHTML =
-        rows + '<div class="h-axis">' + axis + "</div>";
-})();
+    setHTML("accuracyChart", rows + '<div class="h-axis">' + axis + "</div>");
+}
 
 
 /* =====================================================
    4. DIFFICULTY MIX (donut)
 ===================================================== */
 
-(function renderDonut() {
+function renderDonut(difficulty) {
 
     const r = 36;
     const circumference = 2 * Math.PI * r;
     const total = difficulty.reduce(function (sum, d) { return sum + d.value; }, 0);
     const gap = 2;
-
     let used = 0;
 
-    const segments = difficulty.map(function (d) {
+    // nothing solved yet -> show an empty grey ring instead of dividing by zero
+    const segments = total === 0
+        ? `<circle cx="50" cy="50" r="${r}" fill="none" stroke="#2b3042" stroke-width="14"/>`
+        : difficulty.map(function (d) {
+            const length = (d.value / total) * circumference;
+            const seg = `<circle cx="50" cy="50" r="${r}" fill="none"
+                stroke="${esc(d.color)}" stroke-width="14"
+                stroke-dasharray="${Math.max(length - gap, 0)} ${circumference}"
+                stroke-dashoffset="${-used}"><title>${esc(d.name)}: ${d.value}</title></circle>`;
+            used += length;
+            return seg;
+        }).join("");
 
-        const length = (d.value / total) * circumference;
-        const seg = `<circle cx="50" cy="50" r="${r}" fill="none"
-            stroke="${d.color}" stroke-width="14"
-            stroke-dasharray="${Math.max(length - gap, 0)} ${circumference}"
-            stroke-dashoffset="${-used}"><title>${d.name}: ${d.value}</title></circle>`;
-
-        used += length;
-        return seg;
+    const legend = difficulty.map(function (d) {
+        return '<span><i style="background:' + esc(d.color) + '"></i>' + esc(d.name) + ": " + d.value + "</span>";
     }).join("");
 
-    const order = ["Easy", "Medium", "Hard"];
-
-    const legend = order.map(function (name) {
-        const d = difficulty.find(function (x) { return x.name === name; });
-        return '<span><i style="background:' + d.color + '"></i>' + d.name + ": " + d.value + "</span>";
-    }).join("");
-
-    document.getElementById("difficultyChart").innerHTML = `
+    setHTML("difficultyChart", `
         <div class="donut"><svg viewBox="0 0 100 100">${segments}</svg></div>
         <div class="legend">${legend}</div>
-    `;
-})();
+    `);
+}
 
 
 /* =====================================================
@@ -195,13 +151,30 @@ const strongAreas = [
 
 function renderList(id, items, cls) {
 
-    document.getElementById(id).innerHTML = items.map(function (it) {
-        return "<li><span>" + it.name + '</span><span class="' + cls + '">' + it.value + "%</span></li>";
-    }).join("");
+    setHTML(id, items.length
+        ? items.map(function (it) {
+            return "<li><span>" + esc(it.name) + '</span><span class="' + cls + '">' + it.value + "%</span></li>";
+        }).join("")
+        : '<li><span style="opacity:.65">Solve a few more questions to see this.</span></li>');
 }
 
-renderList("weakList", weakAreas, "weak");
-renderList("strongList", strongAreas, "strong");
+
+/* =====================================================
+   LOAD
+===================================================== */
+
+Api.get("/api/progress")
+    .then(function (d) {
+        renderRing(d.stats);
+        renderWeekly(d.weekly);
+        renderAccuracy(d.categoryAccuracy);
+        renderDonut(d.difficulty);
+        renderList("weakList", d.weakAreas, "weak");
+        renderList("strongList", d.strongAreas, "strong");
+    })
+    .catch(function (err) {
+        setHTML("miniStats", "<div><span>" + esc(err.message) + "</span></div>");
+    });
 
 
 /* =====================================================
@@ -209,7 +182,7 @@ renderList("strongList", strongAreas, "strong");
 ===================================================== */
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
-    window.location.href = "login.html";
+    Api.logout();
 });
 
 document.getElementById("themeBtn").addEventListener("click", function () {

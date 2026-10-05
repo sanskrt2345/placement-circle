@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Daily Prep | Placement Circle</title>
+    <title>Question - Placement Circle</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/daily-prep.css">
+    <link rel="stylesheet" href="../css/question.css">
     <link rel="stylesheet" href="../css/animations.css">
 </head>
 
@@ -34,12 +35,12 @@
                 <span>Dashboard</span>
             </a>
 
-            <a href="daily-prep.html" class="nav-item active">
+            <a href="daily-prep.html" class="nav-item">
                 <span class="nav-icon">ϟ</span>
                 <span>Daily Prep</span>
             </a>
 
-            <a href="practice.html" class="nav-item">
+            <a href="practice.html" class="nav-item active">
                 <span class="nav-icon">▣</span>
                 <span>Practice</span>
             </a>
@@ -127,98 +128,40 @@
 
         <section class="content">
 
-            <!-- PAGE HEADER -->
+            <a class="back-link" id="backLink" href="practice.html">‹ Back to Practice</a>
 
-            <div class="page-header">
+            <div class="q-panel" id="qPanel">
 
-                <div>
-                    <h1>Daily Prep</h1>
+                <div class="q-loading" id="qLoading">Loading question...</div>
 
-                    <p>
-                        3 questions · 20 minutes. Every day.
-                    </p>
-                </div>
+                <div id="qContent" hidden>
 
-
-                <!-- MISSION -->
-
-                <div class="mission-card">
-
-                    <div class="mission-circle">
-
-                        <span id="completedCount">0</span>
-                        <span>/3</span>
-
+                    <div class="q-head">
+                        <span class="q-cat" id="qCat"></span>
+                        <span id="qDiff"></span>
+                        <span class="q-time" id="qTime"></span>
+                        <span class="q-solved" id="qSolved" hidden>✓ Solved</span>
                     </div>
 
-                    <div class="mission-text">
-                        <strong>Today's mission</strong>
-                        <span id="missionStatus">3 left</span>
-                    </div>
+                    <h1 id="qTitle"></h1>
+                    <p class="q-companies" id="qCompanies"></p>
+
+                    <div class="q-body" id="qBody"></div>
+
+                    <div id="qOptions" class="q-options"></div>
+
+                    <div class="q-actions" id="qActions"></div>
+
+                    <details class="q-hint">
+                        <summary>Need a hint?</summary>
+                        <p id="qHint"></p>
+                    </details>
+
+                    <div class="q-result" id="qResult" hidden></div>
 
                 </div>
 
             </div>
-
-
-            <!-- QUESTIONS -->
-
-            <div class="question-grid" id="questionGrid">
-</div>
-
-
-            <!-- EXTRA SECTION -->
-
-            <section class="prep-info">
-
-                <div class="info-card">
-
-                    <div class="info-icon">⚡</div>
-
-                    <div>
-                        <h3>Build your daily streak</h3>
-
-                        <p>
-                            Complete all 3 questions every day to improve
-                            your preparation consistency.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="info-card">
-
-                    <div class="info-icon">◷</div>
-
-                    <div>
-                        <h3>Only 20 minutes</h3>
-
-                        <p>
-                            A short daily practice session designed to fit
-                            into your college schedule.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="info-card">
-
-                    <div class="info-icon">↗</div>
-
-                    <div>
-                        <h3>Track your progress</h3>
-
-                        <p>
-                            Your completed questions will contribute to
-                            your overall preparation progress.
-                        </p>
-                    </div>
-
-                </div>
-
-            </section>
 
         </section>
 
@@ -226,11 +169,8 @@
 
 </div>
 
-
 <script src="../js/api.js"></script>
-<script src="../js/daily-prep.js"></script>
-
+<script src="../js/question.js"></script>
 <script src="../js/animations.js"></script>
-
 </body>
 </html>

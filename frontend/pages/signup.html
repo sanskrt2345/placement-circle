@@ -128,15 +128,81 @@
                 >
 
 
-                <!-- SEND OTP -->
+                <!-- BRANCH + YEAR (used for the branch / year leaderboards) -->
+                <div class="field-row">
+                    <div>
+                        <label for="branch">
+                            Branch
+                        </label>
+                        <select id="branch" name="branch">
+                            <option value="">Select</option>
+                            <option>CSE</option>
+                            <option>IT</option>
+                            <option>ECE</option>
+                            <option>EEE</option>
+                            <option>Mechanical</option>
+                            <option>Civil</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="year">
+                            Year
+                        </label>
+                        <select id="year" name="year">
+                            <option value="">Select</option>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                            <option>3rd Year</option>
+                            <option>Final Year</option>
+                        </select>
+                    </div>
+                </div>
 
+                <p class="form-error" id="formError" role="alert" hidden></p>
+                <p class="form-info" id="formInfo" hidden></p>
+
+                <!-- SEND OTP -->
                 <button
                     type="button"
                     class="otp-btn"
+                    id="sendOtpBtn"
                     onclick="sendOTP()"
                 >
                     Send OTP
                 </button>
+
+                <!-- OTP STEP (shown after the code is emailed) -->
+                <div class="otp-step" id="otpStep" hidden>
+                    <label for="otp">
+                        6-digit code
+                    </label>
+                    <input
+                        type="text"
+                        id="otp"
+                        name="otp"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        maxlength="6"
+                        placeholder="______"
+                    >
+                    <button
+                        type="button"
+                        class="otp-btn"
+                        id="verifyBtn"
+                        onclick="verifyOTP()"
+                    >
+                        Verify &amp; create account
+                    </button>
+                    <button
+                        type="button"
+                        class="link-btn"
+                        id="resendBtn"
+                        onclick="resendOTP()"
+                    >
+                        Resend code
+                    </button>
+                </div>
 
 
                 <!-- LOGIN -->
@@ -159,6 +225,7 @@
 
 
     <!-- Signup JavaScript -->
+    <script src="../js/api.js"></script>
     <script src="../js/signup.js"></script>
 
 <script src="../js/animations.js"></script>
